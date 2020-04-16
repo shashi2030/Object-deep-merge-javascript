@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html manifest="developer.appcache">
+<head>
+<meta http-equiv='cache-control' content='private'>
+    <meta http-equiv='expires' content='100'>
+	<meta http-equiv='pragma' content='public'>
+<title>Javascript</title>
+</head>
+<body>
+<script>
+let merge = (...arguments) => {
+
+  // Variables
+  let target = {};
+
+  // Merge the object into the target object
+  let merger = (obj) => {
+      for (let prop in obj) {
+	 if (obj.hasOwnProperty(prop)) {
+	     if (Object.prototype.toString.call(obj[prop]) === '[object Object]') {
+		// If we're doing a deep merge and the property is an object
+		target[prop] = merge(target[prop], obj[prop]);
+	     } else {
+		// Otherwise, do a regular merge
+		target[prop] = obj[prop];
+	     }
+	 }
+      }
+  };
+
+ //Loop through each object and conduct a merge
+ for (let i = 0; i < arguments.length; i++) {
+     merger(arguments[i]);
+ }
+
+ return target;
+};
+let obj1 = {
+  name: 'prashant',
+  age: 23,
+  nature: {
+    "helping": true,
+    "shy": false
+  }
+}
+
+let obj2 = {
+  qualification: 'BSC CS',
+  loves: 'Javascript',
+  nature: {
+    "angry": false,
+    "shy": true
+  }
+}
+
+console.log(merge(obj1, obj2));
+
+</script>
+
+</script>
+</body>
+</html>
